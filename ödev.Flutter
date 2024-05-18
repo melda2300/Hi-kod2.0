@@ -1,0 +1,14 @@
+void main() {
+  int sayi = 10;
+  String metin = "Merhaba Dünya!";
+  double ondalik = 3.14;
+  bool dogruYanlis = true;
+  dynamic dinamik = "Merhaba";
+
+  print('sayi: $sayi');
+  print('metin: $metin');
+  print('ondalik: $ondalik');
+  print('dogruYanlis: $dogruYanlis');
+  print('dinamik: $dinamik');
+  
+}
