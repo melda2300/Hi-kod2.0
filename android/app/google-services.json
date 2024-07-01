@@ -1,18 +1,24 @@
 {
   "project_info": {
     "project_number": "832591828608",
+    "firebase_url": "https://dogal-afetler-default-rtdb.firebaseio.com",
     "project_id": "dogal-afetler",
     "storage_bucket": "dogal-afetler.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:832591828608:android:7e73b18df94a5005803865",
+        "mobilesdk_app_id": "1:832591828608:android:44a071436cb1c665803865",
         "android_client_info": {
-          "package_name": "com.example.dogalfetler"
+          "package_name": "com.example.dogalafetler"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "832591828608-pcf8ck53jpm3mlvse41odaskca15cqlo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAiejNSl160lwtQi3H6cYfMjVCu_x8haj4"
@@ -20,7 +26,91 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832591828608-pcf8ck53jpm3mlvse41odaskca15cqlo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "832591828608-qvm98v0rkh0l1q8i03e02g0aj3rgv17p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hikod"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832591828608:android:7e73b18df94a5005803865",
+        "android_client_info": {
+          "package_name": "com.example.dogalfetler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832591828608-pcf8ck53jpm3mlvse41odaskca15cqlo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiejNSl160lwtQi3H6cYfMjVCu_x8haj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832591828608-pcf8ck53jpm3mlvse41odaskca15cqlo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "832591828608-qvm98v0rkh0l1q8i03e02g0aj3rgv17p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hikod"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832591828608:android:d1f3cc6d82d0fa1b803865",
+        "android_client_info": {
+          "package_name": "com.example.hikod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832591828608-pcf8ck53jpm3mlvse41odaskca15cqlo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiejNSl160lwtQi3H6cYfMjVCu_x8haj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832591828608-pcf8ck53jpm3mlvse41odaskca15cqlo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "832591828608-qvm98v0rkh0l1q8i03e02g0aj3rgv17p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hikod"
+              }
+            }
+          ]
         }
       }
     }

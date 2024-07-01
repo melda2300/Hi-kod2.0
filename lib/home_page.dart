@@ -1,47 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:hikod/auth_service.dart';
 import 'package:provider/provider.dart';
-import 'auth_service.dart';
-import 'alerts_page.dart';
-import 'settings_page.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final List<String> categories = [
+    'Spor',
+    'Ekonomi',
+    'Politika',
+    'Sağlık',
+    'Teknoloji'
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'), // Ana sayfa başlığı
+        title: Text('Haberler'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings), // Ayarlar ikonu
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()), // Ayarlar sayfasına git
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.logout), // Çıkış ikonu
-            onPressed: () {
-              context.read<AuthService>().signOut(); // Çıkış yap
-            },
-          ),
+            icon: Icon(Icons.logout),
+            onPressed: () => authService.logout(),
+          )
         ],
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const AlertsPage()), // Uyarılar sayfasına git
-            );
-          },
-          child: const Text('View Alerts'),
-        ),
+      body: ListView.builder(
+        itemCount: categories.length,
+        itemBuilder: (ctx, index) {
+          return ListTile(
+            title: Text(categories[index]),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => NewsPage(category: categories[index])));
+            },
+          );
+        },
       ),
     );
   }
 }
 
+class NewsPage extends StatelessWidget {
+  final String category;
+
+  NewsPage({required this.category});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('$category Haberleri'),
+      ),
+      body: Center(
+        child: Text('Bu sayfada $category ile ilgili haberler gösterilecektir.'),
+      ),
+    );
+  }
+}

@@ -1,45 +1,31 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'user.dart'; // Yeni oluşturduğumuz user.dart dosyasını içe aktar
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthService extends ChangeNotifier {
-  final authService = Provider.of<AuthService>(context!);
+class AuthService with ChangeNotifier {
+  bool _isAuthenticated = false;
 
-  static BuildContext? get context => null; // Firebase Authentication örneği
-  var _auth;
-  Future<AppUser?> _userFromFirebase(User? user) async {
-    return user != null
-        ? AppUser.fromFirebaseUser(user as AppUser)
-        : null; // Firebase User'ı AppUser'a dönüştür
-  }
+  bool get isAuthenticated => _isAuthenticated;
 
-  Future<dynamic> get currentUser async => _auth.currentUser; // Mevcut kullanıcıyı al
-
-  Stream<AppUser?> get user {
-    return _auth.authStateChanges().map(
-        _userFromFirebase as AppUser? Function(User? event)); // Kullanıcı durumundaki değişiklikleri dinle ve AppUser'a dönüştür
-  }
-
-  Future<void> signIn(String email, String password) async {
-    try {
-      await _auth.signInWithEmailAndPassword(
-          email: email, password: password); // Kullanıcıyı giriş yap
-    } catch (e) {
-      print(e.toString()); // Hata varsa yazdır
+  Future<void> tryAutoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (!prefs.containsKey('userData')) {
+      return;
     }
+    _isAuthenticated = true;
+    notifyListeners();
   }
 
-  Future<void> register(String email, String password) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password); // Yeni kullanıcı oluştur
-    } catch (e) {
-      print(e.toString()); // Hata varsa yazdır
-    }
+  Future<void> login() async {
+    _isAuthenticated = true;
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('userData', 'dummyToken');
+    notifyListeners();
   }
 
-  Future<void> signOut() async {
-    await _auth.signOut(); // Kullanıcıyı çıkış yap
+  Future<void> logout() async {
+    _isAuthenticated = false;
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove('userData');
+    notifyListeners();
   }
 }

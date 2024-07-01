@@ -1,53 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'auth_service.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController(); // Email kontrolcüsü
-  final TextEditingController _passwordController = TextEditingController(); // Şifre kontrolcüsü
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('giriş')), // Uygulama çubuğu başlığı
+      appBar: AppBar(
+        title: Text('Login'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _emailController, // Email kontrolcüsünü bağla
-              decoration: const InputDecoration(labelText: 'Email'), // Email için ipucu metin
-            ),
-            TextField(
-              controller: _passwordController, // Şifre kontrolcüsünü bağla
-              decoration: const InputDecoration(labelText: 'şifre'), // Şifre için ipucu metin
-              obscureText: true, // Şifreyi gizle
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                final email = _emailController.text; // Girilen email
-                final password = _passwordController.text; // Girilen şifre
-                context.read<AuthService>().signIn(email, password); // Giriş yap
-              },
-              child: const Text('Login'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                final email = _emailController.text; // Girilen email
-                final password = _passwordController.text; // Girilen şifre
-                context.read<AuthService>().register(email, password); // Kayıt ol
-              },
-              child: const Text('Kayıt olmak'),
-            ),
-          ],
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _firstNameController,
+                decoration: InputDecoration(labelText: 'First Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your first name';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _lastNameController,
+                decoration: InputDecoration(labelText: 'Last Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your last name';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(labelText: 'Password'),
+                obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState?.validate() ?? false) {
+                    Navigator.pushReplacementNamed(context, '/news');
+                  }
+                },
+                child: Text('Login'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/register');
+                },
+                child: Text('Don\'t have an account? Register'),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,31 +1,31 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hikod/main.dart';
-
-
+import 'package:hikod/home_page.dart'; // HomePage widget'ı import edildiğinden emin olun
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('HomePage initial state test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(MaterialApp(
+      home: HomePage(), // Test edilecek widget'ı belirtin
+    ));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that initial widgets are present.
+    expect(find.text('Haberler'), findsOneWidget); // Uygulama başlığı kontrolü
+    expect(find.byIcon(Icons.logout), findsNothing); // Çıkış yap icon'unun olmadığını kontrol edin
+    expect(find.text('Giriş Yap'), findsOneWidget); // Giriş yap butonunun varlığını kontrol edin
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  testWidgets('HomePage after login test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(MaterialApp(
+      home: HomePage(), // Test edilecek widget'ı belirtin
+    ));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+
+    // Eğer AuthService mocklanmış veya test için ayarlanmışsa, giriş işlemini simüle edin
+    // Örneğin, auth servisi üzerinden giriş işlemini simüle edebilirsiniz.
+
+    // Yapılacak olan bir giriş işlemi, haberlerin görüntülenmesini sağlayacaktır.
+    // Örneğin AuthService kullanımı ve giriş sonrası sayfanın yeniden oluşturulması
   });
 }
